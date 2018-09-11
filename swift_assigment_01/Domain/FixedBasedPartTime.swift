@@ -7,3 +7,42 @@
 //
 
 import Foundation
+
+class FixedBasedPartTime: PartTime
+{
+    private var _fixedAmount: Double
+    override var calcEarnings: Double
+    {
+        return (self.Rate * self.HoursWorked) + self.FixedAmount
+    }
+    
+    override init()
+    {
+        self._fixedAmount = 0.0
+        super.init()
+    }
+    
+    var FixedAmount: Double
+    {
+        get { return self._fixedAmount }
+        set { self._fixedAmount = newValue }
+    }
+    
+    override func printMyData() -> String {
+        return super.printMyData() +
+        "FixedAmount: \(self.FixedAmount) \n"
+    }
+    
+    static func parse(_ obj:[String: Any]) -> FixedBasedPartTime
+    {
+        var parsin: FixedBasedPartTime = FixedBasedPartTime()
+        
+        parsin.Name = obj["Name"] as! String
+        parsin.Age = obj["Age"] != nil ? Int((obj["Age"] as! NSString).floatValue) : 0
+        parsin.Rate = obj["Rate"] != nil ? Double((obj["Rate"] as! NSString).floatValue) : 0.0
+        parsin.HoursWorked = obj["HoursWorked"] != nil ? Double((obj["HoursWorked"] as! NSString).floatValue) : 0.0
+        parsin.FixedAmount = obj["FixedAmount"] != nil ? Double((obj["FixedAmount"] as! NSString).floatValue) : 0.0
+        
+        return parsin
+    }
+}

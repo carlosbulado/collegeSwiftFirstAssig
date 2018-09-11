@@ -7,3 +7,54 @@
 //
 
 import Foundation
+
+class Employee: IPrintable, CustomStringConvertible
+{
+    private var _name: String
+    private var _age: Int
+    private var _wayOfTransportation: Vehicle?
+    var calcBirthYear: Int
+    {
+        return 2019 - self.Age
+    }
+    var calcEarnings: Double
+    {
+        return 1000
+    }
+    
+    init()
+    {
+        self._name = String()
+        self._age = 0
+    }
+    
+    var Name: String
+    {
+        get { return self._name }
+        set { self._name = newValue }
+    }
+    var Age: Int
+    {
+        get { return self._age }
+        set { self._age = newValue }
+    }
+    var WayOfTransportation: Vehicle?
+    {
+        get { return self._wayOfTransportation }
+        set { self._wayOfTransportation = newValue }
+    }
+    
+    func printMyData() -> String {
+        return "This is an instance of: \(type(of: self)) \n" +
+            "Name: \(self.Name) \n" +
+            "Age: \(self.Age) \n" +
+            "BirthYear: \(self.calcBirthYear) \n" +
+            "Earnings: \(self.calcEarnings) \n" +
+            "WayOfTransportation: \n ------ \n" + (self.WayOfTransportation?.printMyData() ?? "") + " ------ \n"
+    }
+    
+    var description: String
+    {
+        return self.printMyData()
+    }
+}

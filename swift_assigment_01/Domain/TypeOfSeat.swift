@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+enum TypeOfSeat
+{
+    case Default
+    case Leather
+}

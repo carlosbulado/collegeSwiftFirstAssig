@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+class Motorcycle : Vehicle
+{
+    static func parse(_ obj: [String: Any]) -> Motorcycle
+    {
+        let parsin: Motorcycle = Motorcycle()
+        
+        parsin.Make = obj["Make"] as! String
+        parsin.Plate = obj["Plate"] as! String
+        parsin.CruiseControl = obj["CruiseControl"] != nil ? obj["CruiseControl"] as! Bool : false
+        parsin.ActivatedCruiseControl = obj["ActivatedCruiseControl"] != nil ? obj["ActivatedCruiseControl"] as! Bool : false
+        parsin.Radio = obj["Radio"] != nil ? obj["Radio"] as! Bool : false
+        parsin.Seat = obj["Seat"] != nil ? obj["Seat"] as! TypeOfSeat : TypeOfSeat.Default
+        
+        return parsin
+    }
+}

@@ -1,14 +1,29 @@
-
 {
     "payroll":
     [
-        {
-            "name": "Bob",
-            "age": "16"
-        },
-        {
-            "name": "Vinny",
-            "age": "56"
-        }
-    ]
+     {
+     "Type": "CommissionBasedPartTime",
+     "Name": "Bob",
+     "Age": "16",
+     "Rate": "50",
+     "HoursWorked": "24",
+     "CommissionPerc": "35",
+     "WayOfTransportation":
+     {
+     "Type": "Motorcycle",
+     "Make": "Honda",
+     "Plate": "YH678",
+     "CruiseControl": true
+     }
+     },
+     {
+     "Type": "FixedBasedPartTime",
+     "Name": "Vinny",
+     "Age": "56",
+     "Rate": "30",
+     "HoursWorked": "36",
+     "FixedAmount": "340",
+     "WayOfTransportation": null
+     }
+     ]
 }

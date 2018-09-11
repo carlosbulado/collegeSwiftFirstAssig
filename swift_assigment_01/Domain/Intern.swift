@@ -7,3 +7,25 @@
 //
 
 import Foundation
+
+class Intern: Employee
+{
+    private var _schoolName: String
+    
+    override init()
+    {
+        self._schoolName = String()
+        super.init()
+    }
+    
+    var SchoolName: String
+    {
+        get { return self._schoolName }
+        set { self._schoolName = newValue }
+    }
+    
+    override func printMyData() -> String {
+        return super.printMyData() +
+        "SchoolName: \(self.SchoolName) \n"
+    }
+}
