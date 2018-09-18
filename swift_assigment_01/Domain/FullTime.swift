@@ -33,7 +33,7 @@ class FullTime: Employee
     
     override func printMyData() -> String {
         return super.printMyData() +
-            "Salary: \(self.Salary) \n" +
-        "Bonus: \(self.Bonus) \n"
+            "Salary: \(self.Salary.Currency()) \n" +
+        "Bonus: \(self.Bonus.Currency()) \n"
     }
 }

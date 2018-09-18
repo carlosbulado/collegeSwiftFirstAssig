@@ -21,6 +21,7 @@
 		071103CC21441E8100C29FEA /* IPrintable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071103CB21441E8100C29FEA /* IPrintable.swift */; };
 		071FED1C2144D8A200DB8A5F /* JSON.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 071FED1A2144CBB200DB8A5F /* JSON.json */; };
 		071FED202144DE9C00DB8A5F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071FED1F2144DE9C00DB8A5F /* Utils.swift */; };
+		07FA50B3214C80C400D641AE /* ExtensionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FA50B2214C80C400D641AE /* ExtensionDouble.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +53,7 @@
 		071103CB21441E8100C29FEA /* IPrintable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPrintable.swift; sourceTree = "<group>"; };
 		071FED1A2144CBB200DB8A5F /* JSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JSON.json; sourceTree = "<group>"; };
 		071FED1F2144DE9C00DB8A5F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		07FA50B2214C80C400D641AE /* ExtensionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDouble.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				071103C721441E5700C29FEA /* CommissionBasedPartTime.swift */,
 				071103C921441E6800C29FEA /* FixedBasedPartTime.swift */,
 				071103CB21441E8100C29FEA /* IPrintable.swift */,
+				07FA50B2214C80C400D641AE /* ExtensionDouble.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			files = (
 				071103C621441E4600C29FEA /* FullTime.swift in Sources */,
 				071103BE21441DFA00C29FEA /* TypeOfSeat.swift in Sources */,
+				07FA50B3214C80C400D641AE /* ExtensionDouble.swift in Sources */,
 				071103C021441E0A00C29FEA /* Employee.swift in Sources */,
 				071103BC21441DE500C29FEA /* Motorcycle.swift in Sources */,
 				071103C221441E1D00C29FEA /* PartTime.swift in Sources */,

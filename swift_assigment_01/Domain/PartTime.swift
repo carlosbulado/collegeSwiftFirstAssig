@@ -33,7 +33,7 @@ class PartTime: Employee
     
     override func printMyData() -> String {
         return super.printMyData() +
-            "Rate: \(self.Rate) \n" +
+            "Rate: \(self.Rate.Currency()) \n" +
         "HoursWorked: \(self.HoursWorked) \n"
     }
 }

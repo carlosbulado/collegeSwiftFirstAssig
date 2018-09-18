@@ -10,6 +10,78 @@ import Foundation
 
 class Utils
 {
+    static var ArrayOfEmployees: [Employee] = [Employee]()
+    
+    static func AddEmployee(_ employee: Employee) throws
+    {
+        if Utils.ArrayOfEmployees.contains(where: { $0.Name == employee.Name }) { throw UtilsError.ValueAlreadyAdded }
+        
+        Utils.ArrayOfEmployees.append(employee)
+    }
+    
+    static func printAssig()
+    {
+        var retrn: String = String()
+        var totalPayRoll: Double = 0.0
+        
+        for e in Utils.ArrayOfEmployees
+        {
+            totalPayRoll += e.calcEarnings
+            retrn += "Name: \(e.Name) \n" +
+            "Year of Birth: \(e.calcBirthYear) \n"
+            
+            if e.WayOfTransportation != nil
+            {
+                let wot = e.WayOfTransportation!
+                retrn += "\t Make: \(wot.Make) \n" +
+                    "\t Plate: \(wot.Plate) \n" +
+                    "\t Cruise Control: \(wot.CruiseControl) \n" +
+                    "\t Activated Cruise Control: \(wot.ActivatedCruiseControl) \n" +
+                    "\t Radio: \(wot.Radio) \n" +
+                    "\t Seat: \(wot.Seat) \n"
+                
+                if wot is Car
+                {
+                    retrn += "\t Reverse Sensor: \((wot as! Car).ReverseSensor) \n"
+                }
+                
+            }
+            else { retrn += "Employee has no Vehicle registered \n" }
+            
+            if e is CommissionBasedPartTime
+            {
+                retrn += "Employee is PartTime / Comissioned \n"
+                let c = e as! CommissionBasedPartTime
+                retrn += "\t Rate: \(c.Rate.Currency()) \n" +
+                    "\t HoursWorked: \(c.HoursWorked) \n" +
+                    "\t Commission: \(c.CommissionPerc)% \n" +
+                    "\t Earnings: \(c.calcEarnings.Currency()) (\((c.Rate * c.HoursWorked).Currency()) + \(c.CommissionPerc)% of \((c.Rate * c.HoursWorked).Currency())) \n"
+            }
+            else if e is FixedBasedPartTime
+            {
+                retrn += "Employee is PartTime / Fixed Ammount \n"
+                let c = e as! FixedBasedPartTime
+                retrn += "\t Rate: \(c.Rate.Currency()) \n" +
+                    "\t HoursWorked: \(c.HoursWorked) \n" +
+                    "\t Fixed Ammount: \(c.FixedAmount.Currency()) \n" +
+                    "\t Earnings: \(c.calcEarnings.Currency()) (\((c.Rate * c.HoursWorked).Currency()) + \(c.FixedAmount.Currency())) \n"
+            }
+            else if e is Intern
+            {
+                retrn += "Employee is Intern \n"
+                let c = e as! Intern
+                retrn += "\t School Name: \(c.SchoolName) \n" +
+                    "\t Earnings: \(c.calcEarnings.Currency()) \n"
+            }
+            
+            retrn += "*************************************************************************************************************************\n"
+        }
+        
+        retrn += "TOTAL PAYROLL: \(totalPayRoll.FormattingDouble()) Canadian Dollars"
+        
+        print(retrn)
+    }
+    
     func initJohn() -> Employee
     {
         let john: Employee = CommissionBasedPartTime()
@@ -76,21 +148,39 @@ class Utils
         
         return matthew
     }
+    
+    init()
+    {
+        do
+        {
+            try Utils.AddEmployee(initJohn())
+            try Utils.AddEmployee(initCindy())
+            try Utils.AddEmployee(initMatthew())
+        }
+        catch UtilsError.ValueAlreadyAdded
+        {
+            print("Employee already added")
+        }
+        catch
+        {
+            print(error)
+        }
+    }
 
     func RunBasicAssigment()
     {
-        let john = initJohn()
-        let cindy = initCindy()
-        let matthew = initMatthew()
         var basicAssg = true
         
         while basicAssg
         {
             print("Basic Assigment:")
-            print("1 - Print John")
-            print("2 - Print Cindy")
-            print("3 - Print Matthew")
-            print("4 - Print Payroll")
+            var numberOfEmployee: Int = 1
+            for e in Utils.ArrayOfEmployees
+            {
+                print("\(numberOfEmployee) - Print \(e.Name)")
+                numberOfEmployee += 1
+            }
+            print("99 - Print Payroll")
             print("0 - Exit Basic Assigment")
             let optionSelectedBasicAssg = readLine()
             
@@ -98,27 +188,31 @@ class Utils
             {
             case "0":
                 print("Back to main options.....")
-            case "1":
-                print(john)
-                break
-            case "2":
-                print(cindy)
-                break
-            case "3":
-                print(matthew)
-                break
-            case "4":
+            case "99":
                 print("PAYROLL:")
-                print("John: \t\t \(john.calcEarnings)")
-                print("Cindy: \t\t \(cindy.calcEarnings)")
-                print("Matthew: \t \(matthew.calcEarnings)")
-                print("TOTAL: \t\t \(john.calcEarnings + cindy.calcEarnings + matthew.calcEarnings)")
+                Utils.printAssig()
                 break
             case .none:
-                basicAssg = false
+                let optInt = Int(optionSelectedBasicAssg!)!
+                if optInt <= Utils.ArrayOfEmployees.count
+                {
+                    print(Utils.ArrayOfEmployees[optInt + 1])
+                }
+                else
+                {
+                    print("There is no Employee in this position!")
+                }
                 break
             case .some(_):
-                basicAssg = false
+                let optInt = Int(optionSelectedBasicAssg!)!
+                if optInt <= Utils.ArrayOfEmployees.count
+                {
+                    print(Utils.ArrayOfEmployees[optInt - 1])
+                }
+                else
+                {
+                    print("There is no Employee in this position!")
+                }
                 break
             }
             
@@ -146,28 +240,68 @@ class Utils
             let data = try Data(contentsOf: url, options: .mappedIfSafe)
             let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
             if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let person = jsonResult["payroll"] as? [[String: Any]] {
-                let personArray = person.compactMap {
+                let _ = person.compactMap {
                     switch $0["Type"] as! String
                     {
                     case "CommissionBasedPartTime":
-                        var obj = CommissionBasedPartTime.parse($0)
-                        print(obj)
+                        let obj = CommissionBasedPartTime.parse($0)
                         totalPayroll += obj.calcEarnings
+                        do
+                        {
+                            try Utils.AddEmployee(obj)
+                        }
+                        catch UtilsError.ValueAlreadyAdded
+                        {
+                            print("Employee already added")
+                        }
+                        catch
+                        {
+                            print(error)
+                        }
                         break
                     case "FixedBasedPartTime":
-                        var obj = FixedBasedPartTime.parse($0)
-                        print(obj)
+                        let obj = FixedBasedPartTime.parse($0)
                         totalPayroll += obj.calcEarnings
+                        do
+                        {
+                            try Utils.AddEmployee(obj)
+                        }
+                        catch UtilsError.ValueAlreadyAdded
+                        {
+                            print("Employee already added")
+                        }
+                        catch
+                        {
+                            print(error)
+                        }
                         break
                     default:
                         break
                     }
                 }
-                
-                print("TOTAL PAYROLL: \(totalPayroll)")
             }
         } catch {
             print(error)
         }
     }
+    
+    func SaveAssigmentToJson()
+    {
+        do
+        {
+            let john = initJohn()
+            //let jsonObj = try JSONSerialization.data(withJSONObject: john, options: .prettyPrinted)
+            //print(jsonObj)
+        }
+        catch
+        {
+            
+            print(error)
+        }
+    }
+}
+
+enum UtilsError : Error
+{
+    case ValueAlreadyAdded
 }

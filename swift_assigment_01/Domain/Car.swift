@@ -10,12 +10,38 @@ import Foundation
 
 class Car : Vehicle
 {
-    private var _reverseSensor: Bool
+    private var _reverseSensor: Bool!
+    
+    private enum CodingKeys : String, CodingKey {
+        case _reverseSensor = "ReverseSensor"
+    }
     
     override init()
     {
         self._reverseSensor = false
         super.init()
+    }
+    
+    init(make: String, plate: String, seat: TypeOfSeat, cruiseControl: Bool, activatedCruiseControl: Bool, radio: Bool, reverseSensor: Bool)
+    {
+        self._reverseSensor = reverseSensor
+        super.init(make: make, plate: plate, seat: seat, cruiseControl: cruiseControl, activatedCruiseControl: activatedCruiseControl, radio: radio)
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        try super.init(from: decoder)
+
+        let reverseSensor = try container.decode(Bool.self, forKey: ._reverseSensor)
+        self._reverseSensor = reverseSensor
+    }
+    
+    override func encode(to encoder: Encoder) throws
+    {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_reverseSensor, forKey: ._reverseSensor)
     }
     
     var ReverseSensor: Bool

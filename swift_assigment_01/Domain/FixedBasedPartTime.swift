@@ -30,12 +30,12 @@ class FixedBasedPartTime: PartTime
     
     override func printMyData() -> String {
         return super.printMyData() +
-        "FixedAmount: \(self.FixedAmount) \n"
+        "FixedAmount: \(self.FixedAmount.Currency()) \n"
     }
     
     static func parse(_ obj:[String: Any]) -> FixedBasedPartTime
     {
-        var parsin: FixedBasedPartTime = FixedBasedPartTime()
+        let parsin: FixedBasedPartTime = FixedBasedPartTime()
         
         parsin.Name = obj["Name"] as! String
         parsin.Age = obj["Age"] != nil ? Int((obj["Age"] as! NSString).floatValue) : 0

@@ -10,6 +10,15 @@ import Foundation
 
 class Motorcycle : Vehicle
 {
+    override init()
+    {
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    
     static func parse(_ obj: [String: Any]) -> Motorcycle
     {
         let parsin: Motorcycle = Motorcycle()

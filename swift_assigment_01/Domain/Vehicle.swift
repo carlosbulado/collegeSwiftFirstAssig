@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Vehicle: IPrintable, CustomStringConvertible
+class Vehicle: IPrintable, Codable, CustomStringConvertible
 {
     private var _make: String
     private var _plate: String
@@ -16,6 +16,15 @@ class Vehicle: IPrintable, CustomStringConvertible
     private var _cruiseControl: Bool
     private var _activatedCruiseControl: Bool
     private var _radio: Bool
+    
+    private enum CodingKeys : String, CodingKey {
+        case _make = "Make"
+        case _plate = "Plate"
+        case _seat = "Seat"
+        case _cruiseControl = "CruiseControl"
+        case _activatedCruiseControl = "ActivatedCruiseControl"
+        case _radio = "Radio"
+    }
     
     init()
     {
@@ -25,6 +34,44 @@ class Vehicle: IPrintable, CustomStringConvertible
         self._cruiseControl = false
         self._activatedCruiseControl = false
         self._radio = false
+    }
+    
+    init(make: String, plate: String, seat: TypeOfSeat, cruiseControl: Bool, activatedCruiseControl: Bool, radio: Bool)
+    {
+        self._make = make
+        self._plate = plate
+        self._seat = seat
+        self._cruiseControl = cruiseControl
+        self._activatedCruiseControl = activatedCruiseControl
+        self._radio = radio
+    }
+    
+    required init(from decoder: Decoder) throws
+    {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let make = try container.decode(String.self, forKey: ._make)
+        let plate = try container.decode(String.self, forKey: ._plate)
+        let seat = try container.decode(TypeOfSeat.self, forKey: ._seat)
+        let cruiseControl = try container.decode(Bool.self, forKey: ._cruiseControl)
+        let activatedCruiseControl = try container.decode(Bool.self, forKey: ._activatedCruiseControl)
+        let radio = try container.decode(Bool.self, forKey: ._radio)
+        self._make = make
+        self._plate = plate
+        self._seat = seat
+        self._cruiseControl = cruiseControl
+        self._activatedCruiseControl = activatedCruiseControl
+        self._radio = radio
+    }
+    
+    func encode(to encoder: Encoder) throws
+    {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_make, forKey: ._make)
+        try container.encode(_plate, forKey: ._plate)
+        try container.encode(_seat, forKey: ._seat)
+        try container.encode(_cruiseControl, forKey: ._cruiseControl)
+        try container.encode(_activatedCruiseControl, forKey: ._activatedCruiseControl)
+        try container.encode(_radio, forKey: ._radio)
     }
     
     var Make: String

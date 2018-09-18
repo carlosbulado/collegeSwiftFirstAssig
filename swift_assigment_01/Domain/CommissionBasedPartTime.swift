@@ -30,7 +30,7 @@ class CommissionBasedPartTime: PartTime
     
     override func printMyData() -> String {
         return super.printMyData() +
-        "CommissionPerc: \(self.CommissionPerc) \n"
+        "CommissionPerc: \(self.CommissionPerc.Currency()) \n"
     }
     
     static func parse(_ obj: [String: Any]) -> CommissionBasedPartTime

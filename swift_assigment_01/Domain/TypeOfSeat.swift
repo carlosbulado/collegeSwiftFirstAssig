@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TypeOfSeat
+enum TypeOfSeat: String, Codable
 {
     case Default
     case Leather
