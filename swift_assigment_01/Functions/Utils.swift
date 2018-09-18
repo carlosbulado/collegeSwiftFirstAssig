@@ -33,6 +33,16 @@ class Utils
             if e.WayOfTransportation != nil
             {
                 let wot = e.WayOfTransportation!
+                
+                if wot is Car
+                {
+                    retrn += "Employee has a Car \n"
+                }
+                else if wot is Motorcycle
+                {
+                    retrn += "Employee has a Motorcycle \n"
+                }
+                
                 retrn += "\t Make: \(wot.Make) \n" +
                     "\t Plate: \(wot.Plate) \n" +
                     "\t Cruise Control: \(wot.CruiseControl) \n" +
@@ -287,17 +297,46 @@ class Utils
     
     func SaveAssigmentToJson()
     {
-        do
-        {
-            let john = initJohn()
+        //do
+        //{
+            _ = initJohn()
             //let jsonObj = try JSONSerialization.data(withJSONObject: john, options: .prettyPrinted)
             //print(jsonObj)
-        }
-        catch
-        {
-            
-            print(error)
-        }
+        //}
+        //catch
+        //{
+        //   print(error)
+        //}
+        
+        
+        /*
+         var listVehicle = [Vehicle]()
+         
+         var test: Vehicle = Car()
+         test.ActivatedCruiseControl = true
+         test.Make = "123"
+         test.Plate = "456"
+         test.Seat = .Leather
+         
+         listVehicle.append(test)
+         
+         test = Motorcycle()
+         test.ActivatedCruiseControl = true
+         test.Make = "123"
+         test.Plate = "456"
+         test.Seat = .Leather
+         
+         listVehicle.append(test)
+         
+         let enTest = try? JSONEncoder().encode(listVehicle)
+         if let encObjTest = String(data: enTest!, encoding: .utf8)
+         {
+         print(encObjTest)
+         
+         let testDecode = try? JSONDecoder().decode([Vehicle].self, from: encObjTest.data(using: .utf8)!)
+         print(testDecode)
+         }
+         */
     }
 }
 

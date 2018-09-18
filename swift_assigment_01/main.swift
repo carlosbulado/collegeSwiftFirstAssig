@@ -48,34 +48,3 @@ while continueProgram
 }
 
 print("Thank you and have a safe trip!")
-
-/*
-var listVehicle = [Vehicle]()
-
-var test: Vehicle = Car()
-test.ActivatedCruiseControl = true
-test.Make = "123"
-test.Plate = "456"
-test.Seat = .Leather
-
-listVehicle.append(test)
-
-test = Motorcycle()
-test.ActivatedCruiseControl = true
-test.Make = "123"
-test.Plate = "456"
-test.Seat = .Leather
-
-listVehicle.append(test)
-
-let enTest = try? JSONEncoder().encode(listVehicle)
-if let encObjTest = String(data: enTest!, encoding: .utf8)
-{
-    print(encObjTest)
-    
-    let testDecode = try? JSONDecoder().decode([Vehicle].self, from: encObjTest.data(using: .utf8)!)
-    print(testDecode)
-}
- */
-
-
