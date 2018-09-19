@@ -22,6 +22,12 @@ class CommissionBasedPartTime: PartTime
         super.init()
     }
     
+    init(name: String, age: Int, wot: Vehicle?, rate: Double, hoursWorked: Double, commission: Double)
+    {
+        self._commissionPerc = commission
+        super.init(name: name, age: age, wot: wot, rate: rate, hoursWorked: hoursWorked)
+    }
+    
     var CommissionPerc: Double
     {
         get { return self._commissionPerc }

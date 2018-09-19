@@ -94,68 +94,21 @@ class Utils
     
     func initJohn() -> Employee
     {
-        let john: Employee = CommissionBasedPartTime()
-        john.Name = "John"
-        john.Age = 22
-        let johnsMoto: Vehicle = Motorcycle()
-        john.WayOfTransportation = johnsMoto
-        johnsMoto.Make = "Harley Davidson"
-        johnsMoto.Plate = "JH9980"
-        johnsMoto.Seat = TypeOfSeat.Leather
-        johnsMoto.CruiseControl = true
-        if john is PartTime
-        {
-            let johnPartTime = john as! PartTime
-            johnPartTime.Rate = 30
-            johnPartTime.HoursWorked = 10
-            if johnPartTime is CommissionBasedPartTime
-            {
-                let johnCommis = johnPartTime as! CommissionBasedPartTime
-                johnCommis.CommissionPerc = 20
-            }
-        }
-        
+        let johnsMoto: Vehicle = Motorcycle(make: "Harley Davidson", plate: "JH9980", seat: .Leather, cruiseControl: true, activatedCruiseControl: false, radio: false)
+        let john: Employee = CommissionBasedPartTime(name: "John", age: 22, wot: johnsMoto, rate: 30, hoursWorked: 10, commission: 20)
         return john
     }
 
     func initCindy() -> Employee
     {
-        let cindy: Employee = FixedBasedPartTime()
-        cindy.Name = "Cindy"
-        cindy.Age = 40
-        let cindyCar: Vehicle = Car()
-        cindy.WayOfTransportation = cindyCar
-        cindyCar.Make = "Honda"
-        cindyCar.Plate = "HA1234"
-        cindyCar.Seat = TypeOfSeat.Default
-        cindyCar.CruiseControl = true
-        cindyCar.Radio = true
-        if cindy is PartTime
-        {
-            let cindyPartTime = cindy as! PartTime
-            cindyPartTime.Rate = 30
-            cindyPartTime.HoursWorked = 10
-            if cindyPartTime is FixedBasedPartTime
-            {
-                let cindyFix = cindyPartTime as! FixedBasedPartTime
-                cindyFix.FixedAmount = 40.0
-            }
-        }
-        
+        let cindyCar: Vehicle = Car(make: "Honda", plate: "HA1234", seat: .Default, cruiseControl: true, activatedCruiseControl: false, radio: true, reverseSensor: false)
+        let cindy: Employee = FixedBasedPartTime(name: "Ciny", age: 40, wot: cindyCar, rate: 30, hoursWorked: 10, fixed: 40.0)
         return cindy
     }
 
     func initMatthew() -> Employee
     {
-        let matthew: Employee = Intern()
-        matthew.Name = "Matthew"
-        matthew.Age = 24
-        if matthew is Intern
-        {
-            let matthewIntern = matthew as! Intern
-            matthewIntern.SchoolName = "Lambton College"
-        }
-        
+        let matthew: Employee = Intern(name: "Matthew", age: 24, wot: nil, schoolName: "Lambton College")
         return matthew
     }
     

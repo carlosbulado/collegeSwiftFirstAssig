@@ -15,6 +15,11 @@ class Motorcycle : Vehicle
         super.init()
     }
     
+    override init(make: String, plate: String, seat: TypeOfSeat, cruiseControl: Bool, activatedCruiseControl: Bool, radio: Bool)
+    {
+        super.init(make: make, plate: plate, seat: seat, cruiseControl: cruiseControl, activatedCruiseControl: activatedCruiseControl, radio: radio)
+    }
+    
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }

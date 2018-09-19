@@ -22,6 +22,12 @@ class FixedBasedPartTime: PartTime
         super.init()
     }
     
+    init(name: String, age: Int, wot: Vehicle?, rate: Double, hoursWorked: Double, fixed: Double)
+    {
+        self._fixedAmount = fixed
+        super.init(name: name, age: age, wot: wot, rate: rate, hoursWorked: hoursWorked)
+    }
+    
     var FixedAmount: Double
     {
         get { return self._fixedAmount }

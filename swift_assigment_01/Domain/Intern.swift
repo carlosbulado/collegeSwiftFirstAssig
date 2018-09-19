@@ -18,6 +18,12 @@ class Intern: Employee
         super.init()
     }
     
+    init(name: String, age: Int, wot: Vehicle?, schoolName: String)
+    {
+        self._schoolName = schoolName
+        super.init(name: name, age: age, wot: wot)
+    }
+    
     var SchoolName: String
     {
         get { return self._schoolName }

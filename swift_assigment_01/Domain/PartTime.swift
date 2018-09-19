@@ -20,6 +20,13 @@ class PartTime: Employee
         super.init()
     }
     
+    init(name: String, age: Int, wot: Vehicle?, rate: Double, hoursWorked: Double)
+    {
+        self._rate = rate
+        self._hoursWorked = hoursWorked
+        super.init(name: name, age: age, wot: wot)
+    }
+    
     var Rate: Double
     {
         get { return self._rate }

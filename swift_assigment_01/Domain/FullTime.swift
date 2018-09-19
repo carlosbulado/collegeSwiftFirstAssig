@@ -20,6 +20,13 @@ class FullTime: Employee
         super.init()
     }
     
+    init(name: String, age: Int, wot: Vehicle?, salary: Double, bonus: Double)
+    {
+        self._salary = salary
+        self._bonus = bonus
+        super.init(name: name, age: age, wot: wot)
+    }
+    
     var Salary: Double
     {
         get { return self._salary }

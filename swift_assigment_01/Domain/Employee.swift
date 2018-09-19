@@ -28,6 +28,13 @@ class Employee: IPrintable, CustomStringConvertible
         self._age = 0
     }
     
+    init(name: String, age: Int, wot: Vehicle?)
+    {
+        self._name = name
+        self._age = age
+        self._wayOfTransportation = wot
+    }
+    
     var Name: String
     {
         get { return self._name }
